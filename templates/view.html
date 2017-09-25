@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <title>StringMetric</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/mainpage.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>   
+  </head>
+
+  <body>
+    <h1>String Distance Calculator</h1>
+
+    <form method=post action="" class_="form-style-8">
+      <table>
+        <th>
+          Enter the strings for comparison and select the distance method
+        </th>
+        <tr>
+          <td>Enter a string</td>
+          <td id="string1">{{ (form.str1) }}</td>
+        </tr>
+        <tr>
+          <td>Enter another string</td>
+          <td id="string2">{{ (form.str2) }}</td>
+        </tr>
+        <tr>
+          <td>Select a method</td>
+          <td id="choose_method">
+            <select name="metrics">
+              <option value="hamming">Hamming</option>
+              <option value="jaccard">Jaccard</option>
+              <option value="levenshtein">Lenenshtein</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td id="button">
+  <input type=submit value=calculate>
+          </td>
+          <td id="result">
+            {% if result != None %}
+            <b id="result">{{ result }}</b>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <p>
+            {% if form.str2.errors %}
+            {% for error in form.str2.errors %}
+            <div class="col-sm-3">
+              <div style="color: red; font-size=25px;"> {{ error }}</div>
+            </div>
+            {% endfor %}
+            {% endif %}
+          </p>
+        </tr>
+      </form>
+    </body>
+
